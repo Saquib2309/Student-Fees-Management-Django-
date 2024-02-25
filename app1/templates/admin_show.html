@@ -1,0 +1,68 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+<style>
+    p{
+    color:black;
+    }
+    button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+</style>
+
+<h1>Admin Show</h1>
+{% if data1 %}
+{% for k in data1 %}
+<img src="../media/{{k.photo}}" width="100" height="100"><br>
+<a href="../change_photo/">change</a>
+{% endfor %}
+{% else %}
+<form method="post" action="../upload_photo_admin/" enctype="multipart/form-data">
+  {% csrf_token %}
+  <p>Photo:<input type="file" name="F1" ></p>
+  <input type="submit" name="B1" value="upload">
+</form>
+{% endif %}
+
+<br>
+<br>
+
+{% if data %}
+{% for k in data %}
+<p>Name:{{k.name}}</p>
+<p>Address:{{k.address}}</p>
+<p>Contact:{{k.contact}}</p>
+<p>Email:{{k.email}}</p>
+
+<table>
+    <tr>
+        <td>
+            <form method="post" action="../edit_admin/">
+                <input type="hidden" name="H1" value="{{K.email}}">
+                <button type="submit" name="B1" ><img src="../static/photo/edit.svg">Edit</button>
+            </form>
+        </td>
+         <td>
+            <form method="post" action="../delete_admin/">
+                <input type="hidden" name="H1" value="{{K.email}}">
+                <button type="submit" name="B1" ><img src="../static/photo/delete.svg">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<hr>
+{% endfor %}
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a></button>
+{% endblock %}

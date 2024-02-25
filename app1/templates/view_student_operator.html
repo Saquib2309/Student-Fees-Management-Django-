@@ -1,0 +1,138 @@
+{% extends 'd_operator.html' %}
+{% load static %}
+{% block m1 %}
+<style>
+    p{
+    color:black;
+    }
+    button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+</style>
+
+<h1>Student Profile</h1>
+{% if data1 %}
+{% for k in data1 %}
+<img src="../media/{{k.photo}}" width="100" height="100">
+<form method="post" action="../change_photo_student_operator/">
+    {% csrf_token %}
+    <input type="hidden" name="H1" value="{{k.email}}">
+    <button type="submit" name="B1" ><img src="../static/photo/change.svg">Change</button>
+</form>
+
+</p>
+{% endfor %}
+
+{% else %}
+{% for k in data %}
+<form method="post" action="../upload_photo_student_operator/" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <p>Photo:<input type="file" name="F1" ></p>
+    <input type="hidden" name="H1" value="{{k.email}}">
+  <input type="submit" name="B1" value="upload">
+
+</form>
+{% endfor %}
+
+{% endif %}
+
+{% if data %}
+{% for k in data %}
+    <p>Name:{{k.name}}</p>
+    <p>Address:{{k.address}}</p>
+    <p>Contact:{{k.contact}}</p>
+    <p>Email:{{k.email}}</p>
+
+    <table>
+    <tr>
+        <td>
+            <form method="post" action="../edit_student_operator/">
+                {% csrf_token %}
+                <input type="hidden" name="H1" value="{{k.email}}">
+                <button type="submit" name="B1" ><img src="../static/photo/edit.svg">Edit</button>
+            </form>
+        </td>
+         <td>
+            <form method="post" action="../delete_student_operator/">
+                {% csrf_token %}
+                <input type="hidden" name="H1" value="{{k.email}}">
+                <button type="submit" name="B1" ><img src="../static/photo/delete.svg">Delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+{% endfor %}
+{% endif %}
+
+<h1>Courses</h1>
+
+<table border="1">
+    <tr>
+        <td>#</td>
+        <th>Course Id</th>
+        <th>Course Name</th>
+        <th>Fees</th>
+        <th>Duration</th>
+        <th>Commencement Date</th>
+        <th>Paid</th>
+        <th>Due</th>
+
+    </tr>
+    {% if data2 %}
+    {% for k in data2 %}
+    <tr>
+        <td>{{ k.0 }}</td>
+        <td>{{ k.1 }}</td>
+        <td>{{ k.3 }}</td>
+        <td>{{ k.4 }}</td>
+        <td>{{ k.5 }}</td>
+        <td>{{k.6}}</td>
+        <td>{{k.7}}</td>
+        <td>{{k.8}}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+</table>
+<br>
+<h3>Total : {{total}}</h3>
+<br>
+<h3>Total Paid:{{total_paid}}</h3>
+<h3>Total Due :{{total_due}}</h3>
+<br>
+<br>
+<h1>Transaction History</h1>
+<table border="1">
+    <tr>
+        <th>Transaction Id</th>
+        <th>Course Id</th>
+        <th>Amound</th>
+        <th>Date of Transaction</th>
+        <th>Remarks </th>
+    </tr>
+    {% if data3 %}
+    {% for k in data3 %}
+    <tr>
+        <td>{{k.t_id}}</td>
+        <td>{{k.course_id}}</td>
+        <td>{{k.amount}}</td>
+        <td>{{k.t_date}}</td>
+        <td>{{k.remark}}</td>
+    </tr>
+    {% endfor%}
+    {% endif %}
+</table>
+<button><a href="../operator_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

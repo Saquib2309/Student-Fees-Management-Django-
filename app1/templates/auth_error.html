@@ -1,0 +1,30 @@
+{% extends 'login.html' %}
+{% load static %}
+{% block m1 %}
+
+<style>
+    h1{
+    color:black;
+    }
+
+button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+
+</style>
+
+<h1>Authorization Error</h1>
+
+<button><a href="../login/">continue</a></button>
+{% endblock %}

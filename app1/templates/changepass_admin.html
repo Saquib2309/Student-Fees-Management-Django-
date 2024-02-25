@@ -1,0 +1,136 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+
+
+<html>
+<head>
+<style>
+
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+
+
+	}
+
+p{
+  color:black;
+}
+input{
+	margin:10px;
+	border-radius:5px;
+	box-sizing:border-box;
+	background-color:#6FC;
+	}
+
+button{
+	box-sizing:border-box;
+     border-radius:10px;
+	 margin:8px;
+	 font-size:20px;
+	 background-color:#0CF;
+	 color:#FFF;
+	}
+button:hover{
+	background-color:#30F;
+
+}
+</style>
+
+
+</head>
+<body>
+<center>
+<h1>Change Password Admin</h1>
+<form class="s" onSubmit="return a()" method="post" action="../changepass_admin/">
+{% csrf_token %}
+<p>OLD PASSWORD:<input type="password" id="txt1" name="T1"  /><span id="sp1"></span></p>
+<p>NEW PASSWORD:<input type="password" id="txt2" name="T2" /><span id="sp2"></span></p>
+<p>CONFIRM PASSWORD:<input type="password" id="txt3"  name="T3"/><span id="sp3"></span></p>
+<p><button type="submit" id="bt1">REGISTER</button></p>
+
+
+</form>
+</center>
+
+
+<script>
+
+function a()
+{
+	var t1,t2,t3,e1,e2,e3;
+	t1=document.getElementById("txt1");
+	t2=document.getElementById("txt2");
+	t3=document.getElementById("txt3");
+	e1=document.getElementById("sp1");
+	e2=document.getElementById("sp2");
+	e3=document.getElementById("sp3");
+
+
+	var a,b,c;
+	a=t1.value;
+	b=t2.value;
+	c=t3.value;
+
+	e1.innerHTML="";
+	e2.innerHTML="";
+	e3.innerHTML="";
+
+	if(a==null || a=="")
+	{
+		e1.innerHTML="Enter Password";
+		t1.focus();
+		return false;
+	}
+
+	else if(b==null || b=="")
+	{
+		e2.innerHTML="Enter Password";
+		t2.focus();
+		return false;
+	}
+	if(c==null || c=="")
+	{
+		e3.innerHTML="Enter Password";
+		t3.focus();
+		return false;
+	}
+	else if(sj(b,c)==false)
+	{
+		e2.innerHTML="password does not match";
+		t2.value="";
+		t3.value="";
+		t2.focus();
+		return false;
+	}
+
+
+
+
+function sj(p1,p2)
+{
+	if(p1==p2)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
+
+
+
+}
+
+</script>
+
+</body>
+</html>
+
+{% if data %}
+<h2>{{data}}</h2>
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

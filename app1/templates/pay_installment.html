@@ -1,0 +1,43 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+<style>
+p{
+    color:black;
+    }
+
+button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+</style>
+<h1>Fees Deposit</h1>
+{% if data %}
+{% for k in data %}
+<form method="post" action="../pay_installment1/">
+  {% csrf_token %}
+  <p><h2>{{k.course_id}}. {{k.course_name}}</h2></p>
+  <p>Fees:{{k.fees}}</p>
+  <p>Duration:{{k.duration}}</p>
+  <p>Commencement Date:{{k.commencement_date}}</p>
+  <p>Amount to pay:<input type="text" name="T1"></p>
+  <p>Remark:<input type="text" name="T2"></p>
+  <p><button type="submit" name="B1" >Submit</button>
+  <input type="hidden" name="H1" value="{{k.email}}">
+  <input type="hidden" name="H2" value="{{k.st_course_id}}">
+  </p>
+</form>
+{% endfor %}
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

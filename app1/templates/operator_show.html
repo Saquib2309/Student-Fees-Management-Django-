@@ -1,0 +1,47 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+<style>
+    p{
+    color:black;
+    }
+    button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+</style>
+
+
+{% if data %}
+{% for k in data %}
+    <p>Name:{{k.name}}</p>
+    <p>Address:{{k.address}}</p>
+    <p>Contact:{{k.contact}}</p>
+    <p>Email:{{k.email}}</p>
+
+    <table>
+      <tr>
+        <td>
+          <form method="post" action="../view_operator_admin/">
+            {% csrf_token %}
+            <input type="hidden" name="H1" value="{{k.email}}">
+              <button type="submit" name="B1" >View Details</button>
+          </form>
+        </td>
+      </tr>
+    </table>
+   <hr>
+{% endfor %}
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

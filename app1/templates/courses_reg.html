@@ -1,0 +1,140 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+
+
+<html>
+<head>
+<style>
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:18px;
+
+	}
+
+
+input{
+	margin:10px;
+	border-radius:5px;
+	box-sizing:border-box;
+	background-color:#6FC;
+	}
+
+button{
+	box-sizing:border-box;
+     border-radius:10px;
+	 margin:8px;
+	 font-size:20px;
+	 background-color:#0CF;
+	 color:#FFF;
+	}
+button:hover{
+	background-color:#30F;
+
+}
+</style>
+
+
+</head>
+<body>
+<center>
+<h1>Course Add</h1>
+<form class="s" onSubmit="return a()" method="post" action="../courses_reg/">
+{% csrf_token %}
+   <table width="34%">
+
+<p><tr><td>Course NAME:</td><td><input type="text" id="txt1" name="T1"  /><br><span  id="sp1" style="color:#F30 "></span></td></tr></p>
+<p><tr><td>Fees:</td><td><input type="text" id="txt2" name="T2"  /><span id="sp2"></span></td></tr></p>
+<p><tr><td>Duration:</td><td><input type="text" id="txt3"   name="T3"/><span id="sp3"></span></td></tr></p>
+<p><tr><td><button type="submit" id="bt1">REGISTER</button></td></tr></p>
+
+ </table>
+</form>
+</center>
+
+
+<script>
+
+function a()
+{
+	var t1,t2,t3,e1,e2,e3;
+	t1=document.getElementById("txt1");
+	t2=document.getElementById("txt2");
+	t3=document.getElementById("txt3");
+	e1=document.getElementById("sp1");
+	e2=document.getElementById("sp2");
+	e3=document.getElementById("sp3");
+
+
+	var a,b,c;
+	a=t1.value;
+	b=t2.value;
+	c=t3.value;
+
+	e1.innerHTML="";
+	e2.innerHTML="";
+	e3.innerHTML="";
+
+	if(a==null || a=="")
+	{
+		e1.innerHTML="*Enter Course Name";
+		t1.focus();
+		return false;
+	}
+
+	else if(b==null || b=="")
+	{
+		e2.innerHTML="Enter Fees";
+		t2.focus();
+		return false;
+	}
+	else if(javed(b)==false)
+	{
+		e2.innerHTML="enter only digit";
+		t2.select();
+		return false;
+	}
+	else if(c==null || c=="")
+	{
+		e3.innerHTML="Enter Duration";
+		t3.focus();
+		return false;
+	}
+
+
+
+
+function javed(str)
+{
+	var f=true;
+	for(var i=0;i<str.length;i++)
+	{
+		var ch=str.charAt(i);
+		if(ch>='0' && ch<='9')
+		{
+			f=true;
+		}
+		else
+		{
+			f=false;
+			break;
+		}
+
+	}
+	return f;
+}
+
+
+
+}
+
+</script>
+
+</body>
+</html>
+{% if data %}
+<h2>{{data}}</h2>
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+
+{% endblock %}

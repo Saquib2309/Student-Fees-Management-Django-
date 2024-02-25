@@ -1,0 +1,60 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+
+<style>
+    p{
+    color:black;
+    }
+
+button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+
+</style>
+
+<h1>Courses</h1>
+
+  {% if data %}
+  {% for k in data %}
+    <h2>{{k.course_name}}</h2>
+    <p>St Id:{{k.course_id}}</p>
+    <p>Fees:{{k.fees}}</p>
+    <p>Durstion:{{k.duration}}</p>
+  <table>
+    <tr>
+      <td>
+      <form method="post" action="../edit_courses/">
+        {% csrf_token %}
+        <input type="hidden" name="H1" value="{{k.course_id}}">
+        <button type="submit" name="B1" ><img src="../static/photo/edit.svg">Edit</button>
+      </form>
+      </td>
+
+       <td>
+      <form method="post" action="../delete_courses/">
+        {% csrf_token %}
+        <input type="hidden" name="H1" value="{{k.course_id}}">
+        <button type="submit" name="B1" ><img src="../static/photo/delete.svg">Delete</button>
+      </form>
+       </td>
+    </tr>
+  </table>
+  <hr>
+  {% endfor %}
+{% endif %}
+</table>
+
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'd_admin.html' %}
+{% load static %}
+{% block m1 %}
+
+<style>
+    p{
+    color:black;
+    }
+
+button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+
+</style>
+
+
+<h1>COURSES ADD</h1>
+{% if data %}
+<table border="2">
+    <tr>
+        <th>Courses Id</th>
+        <th>Courses Name</th>
+        <th>Courses Fees</th>
+        <th>Courses Duration</th>
+        <th>ADD</th>
+    </tr>
+    {% for k in data %}
+    <tr>
+        <td>{{k.course_id}}</td>
+        <td>{{k.course_name}}</td>
+        <td>{{k.fees}}</td>
+        <td>{{k.duration}}</td>
+        <td>
+        <form method="post" action="../add_courses1/">
+            {% csrf_token %}
+             <input type="hidden" name="H1" value="{{email}}">
+             <input type="hidden" name="H2" value="{{k.course_id}}">
+            <button type="submit" name="B1" ><img src="../static/photo/add.svg">ADD</button>
+        </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+<button><a href="../admin_home"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}

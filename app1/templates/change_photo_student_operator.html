@@ -1,0 +1,32 @@
+{% extends 'd_operator.html' %}
+{% load static %}
+{% block m1 %}
+
+<style>
+    h2{
+    color:black;
+    }
+
+button{
+    background-color:#6C9;
+	color:#FFF;
+	border:1px solid #0CF;
+	border-radius:10px;
+	padding:6px;
+	font-size:16px;
+	margin:8px;
+	}
+button:hover{
+    background-color:#6F9;
+	cursor:pointer;
+
+}
+
+</style>
+
+{% if data %}
+<h2>{{data}}</h2>
+{% endif %}
+
+<button><a href="../student_show_operator"><img src="../static/photo/back.svg">BACK</a> </button>
+{% endblock %}
